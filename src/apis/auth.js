@@ -1,33 +1,14 @@
-import axios from "axios";
-
+import { authService } from "../utils/services";
 import { URL } from "../constants";
 
 export const signup = async (form) => {
-  try {
-    await axios.post(URL.SIGN_UP, form, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    return { isSignUp: true };
-  } catch (err) {
-    console.error(err);
-    return { isSignUp: false };
-  }
+  const instance = authService();
+  await instance.post(URL.SIGN_UP, form);
 };
 
 export const signin = async (form) => {
-  try {
-    const { data } = await axios.post(URL.SIGN_IN, form, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  const instance = authService();
+  const { data } = await instance.post(URL.SIGN_IN, form);
 
-    return data;
-  } catch (err) {
-    console.error(err);
-    return { access_token: null };
-  }
+  return data;
 };

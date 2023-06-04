@@ -27,11 +27,13 @@ const SignIn = () => {
   const handleSignInSubmit = async (e) => {
     e.preventDefault();
 
-    const { access_token } = await signin(form);
+    try {
+      const { access_token } = await signin(form);
 
-    if (access_token) {
       setLocalStorage("access_token", access_token);
       navigate(PATH.TODO);
+    } catch (err) {
+      console.error(err);
     }
   };
 

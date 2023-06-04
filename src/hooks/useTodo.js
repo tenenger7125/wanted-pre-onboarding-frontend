@@ -8,29 +8,45 @@ const useTodo = () => {
   const handleCreateTodo = async (e) => {
     e.preventDefault();
 
-    const todo = await createTodo(e.target.newTodo.value.trim());
+    try {
+      const todo = await createTodo(e.target.newTodo.value.trim());
 
-    e.target.newTodo.value = "";
-    if (todo) setTodos([...todos, todo]);
+      e.target.newTodo.value = "";
+      setTodos([...todos, todo]);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleUpdateTodo = async (id, todo, isCompleted) => {
-    const updatedTodo = await updateTodo(id, todo, isCompleted);
+    try {
+      const updatedTodo = await updateTodo(id, todo, isCompleted);
 
-    if (updatedTodo) setTodos(todos.map((todo) => (todo.id === id ? { ...todo, ...updatedTodo } : todo)));
+      setTodos(todos.map((todo) => (todo.id === id ? { ...todo, ...updatedTodo } : todo)));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleDeleteTodo = async (id) => {
-    const isDeleted = await deleteTodo(id);
+    try {
+      await deleteTodo(id);
 
-    if (isDeleted) setTodos(todos.filter((todo) => todo.id !== id));
+      setTodos(todos.filter((todo) => todo.id !== id));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
     (async () => {
-      const todos = await getTodos();
+      try {
+        const todos = await getTodos();
 
-      setTodos(todos);
+        setTodos(todos);
+      } catch (err) {
+        console.error(err);
+      }
     })();
   }, []);
 

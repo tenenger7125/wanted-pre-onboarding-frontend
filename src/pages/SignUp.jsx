@@ -26,9 +26,13 @@ const SignUp = () => {
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
 
-    const { isSignUp } = await signup(form);
+    try {
+      await signup(form);
 
-    if (isSignUp) navigate(PATH.SIGN_IN);
+      navigate(PATH.SIGN_IN);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
