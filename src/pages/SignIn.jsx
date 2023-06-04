@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { signin } from "../apis/auth";
+import { auth } from "../apis";
 import { setLocalStorage } from "../utils/localStorage";
 import { emailValidate, passwordValidate } from "../utils/validate";
 import { PATH } from "../constants";
+
+const { signin } = auth();
 
 const SignIn = () => {
   const navigate = useNavigate();

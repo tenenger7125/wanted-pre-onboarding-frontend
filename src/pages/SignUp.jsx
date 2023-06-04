@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { signup } from "../apis/auth";
+import { auth } from "../apis/auth";
 import { emailValidate, passwordValidate } from "../utils/validate";
 import { PATH } from "../constants";
+
+const { signup } = auth();
 
 const SignUp = () => {
   const navigate = useNavigate();
