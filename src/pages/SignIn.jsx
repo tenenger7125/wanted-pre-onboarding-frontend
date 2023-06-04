@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { auth } from "../apis";
-import { setLocalStorage } from "../utils/localStorage";
-import { emailValidate, passwordValidate } from "../utils/validate";
+import { localStorages, validates } from "../utils";
 import { PATH } from "../constants";
 
-const { signin } = auth();
+const { signin } = auth;
+const { email: emailValidate, password: passwordValidate } = validates;
+const { setLocalStorage } = localStorages;
 
 const SignIn = () => {
   const navigate = useNavigate();

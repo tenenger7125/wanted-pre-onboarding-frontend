@@ -1,6 +1,8 @@
 import { Navigate } from "react-router-dom";
 
-import { getLocalStorage } from "../../utils/localStorage";
+import { localStorages } from "../../utils";
+
+const { getLocalStorage } = localStorages;
 
 const PrivateRoute = ({ element, redirectTo }) => {
   const authenticated = getLocalStorage("access_token");

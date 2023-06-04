@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { todo } from "../apis/todo";
+import { todo } from "../apis";
 
-const { createTodo, deleteTodo, getTodos, updateTodo } = todo();
+const { createTodo, deleteTodo, getTodos, updateTodo } = todo;
 
 const useTodo = () => {
   const [todos, setTodos] = useState([]);

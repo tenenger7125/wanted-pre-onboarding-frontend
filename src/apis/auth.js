@@ -1,18 +1,16 @@
-import { authService } from "../utils/services";
+import { services } from "../utils";
 import { URL } from "../constants";
 
-const auth = () => {
-  const instance = authService();
+const { auth: authService } = services;
 
-  return {
-    async signin(form) {
-      const { data } = await instance.post(URL.SIGN_IN, form);
-      return data;
-    },
-    async signup(form) {
-      await instance.post(URL.SIGN_UP, form);
-    },
-  };
+const auth = {
+  async signin(form) {
+    const { data } = await authService().post(URL.SIGN_IN, form);
+    return data;
+  },
+  async signup(form) {
+    await authService().post(URL.SIGN_UP, form);
+  },
 };
 
 export default auth;
