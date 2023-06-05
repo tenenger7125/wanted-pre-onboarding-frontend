@@ -13,8 +13,8 @@ const TodoItem = ({ todo: { id, todo, isCompleted }, handleUpdateTodo, handleDel
     setModifyValue(todo);
   };
 
-  const handleUpdateContentTodo = () => {
-    handleUpdateTodo(id, modifyValue, isCompleted);
+  const handleUpdateContentTodo = async () => {
+    await handleUpdateTodo(id, modifyValue, isCompleted);
     handleToggleEdit();
   };
 
