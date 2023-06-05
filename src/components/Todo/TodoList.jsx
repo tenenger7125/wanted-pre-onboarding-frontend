@@ -1,12 +1,13 @@
+import { STodoList } from "./Todo.style";
 import TodoItem from "./TodoItem";
 
 const TodoList = ({ todos, ...rest }) => {
   return (
-    <ul>
+    <STodoList>
       {todos.map((todo) => (
         <TodoItem key={todo.id} todo={todo} {...rest} />
       ))}
-    </ul>
+    </STodoList>
   );
 };
 

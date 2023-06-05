@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Button, Input } from "../common";
+import { SButtonContainer, SCheckBoxIcon } from "./Todo.style";
 
 const TodoItem = ({ todo: { id, todo, isCompleted }, handleUpdateTodo, handleDeleteTodo }) => {
   const [modifyValue, setModifyValue] = useState(todo);
@@ -19,32 +21,29 @@ const TodoItem = ({ todo: { id, todo, isCompleted }, handleUpdateTodo, handleDel
   return (
     <li>
       <label>
+        <SCheckBoxIcon size="1.5rem" $isCompleted={isCompleted} />
         <input type="checkbox" checked={isCompleted} onChange={() => handleUpdateTodo(id, todo, !isCompleted)} />
         {isEdited ? (
-          <input data-testid="modify-input" value={modifyValue} onChange={handleModifyTodo} />
+          <Input data-testid="modify-input" value={modifyValue} onChange={handleModifyTodo} />
         ) : (
           <span>{todo}</span>
         )}
       </label>
-      {isEdited ? (
-        <>
-          <button data-testid="submit-button" onClick={handleUpdateContentTodo}>
-            제출
-          </button>
-          <button data-testid="cancel-button" onClick={handleToggleEdit}>
-            취소
-          </button>
-        </>
-      ) : (
-        <>
-          <button data-testid="modify-button" onClick={handleToggleEdit}>
-            수정
-          </button>
-          <button data-testid="delete-button" onClick={() => handleDeleteTodo(id)}>
-            삭제
-          </button>
-        </>
-      )}
+      <SButtonContainer>
+        <Button
+          data-testid={`${isEdited ? "submit" : "modify"}-button`}
+          onClick={isEdited ? handleUpdateContentTodo : handleToggleEdit}
+        >
+          {isEdited ? "제출" : "수정"}
+        </Button>
+        <Button
+          variant="outline"
+          data-testid={`${isEdited ? "cancel" : "delete"}-button`}
+          onClick={isEdited ? handleToggleEdit : () => handleDeleteTodo(id)}
+        >
+          {isEdited ? "취소" : "삭제"}
+        </Button>
+      </SButtonContainer>
     </li>
   );
 };

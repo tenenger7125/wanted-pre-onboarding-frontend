@@ -1,8 +1,12 @@
+import { Input, Button } from "../common";
+
 const TodoInput = ({ handleCreateTodo }) => {
   return (
     <form onSubmit={handleCreateTodo}>
-      <input data-testid="new-todo-input" name="newTodo" />
-      <button data-testid="new-todo-add-button">추가</button>
+      <Input data-testid="new-todo-input" name="newTodo" placeholder="할일을 추가해보세요" />
+      <Button data-testid="new-todo-add-button" type="submit" margin="15px 0 40px">
+        추가
+      </Button>
     </form>
   );
 };
