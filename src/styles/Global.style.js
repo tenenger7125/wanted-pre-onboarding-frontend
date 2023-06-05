@@ -12,11 +12,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body, #root {
-  height: 100%;
+    height: 100%;
   }
 
   ul, ol, li {
-  list-style: none;
+    list-style: none;
   }
 
   a {

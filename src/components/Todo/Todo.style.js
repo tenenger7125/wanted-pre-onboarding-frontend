@@ -1,5 +1,5 @@
-import { BsCheckSquare } from "react-icons/bs";
 import styled from "styled-components";
+import { BsCheckSquare } from "react-icons/bs";
 
 export const STodoList = styled.ul`
   margin-top: 40px;
