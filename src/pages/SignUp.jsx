@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { auth } from "../apis";
 import { validates } from "../utils";
 import { PATH } from "../constants";
+import { Button, Container, Input, Title } from "../components/common";
 
 const { signup } = auth;
 const { email: emailValidate, password: passwordValidate } = validates;
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [isError, setIsError] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -33,25 +35,43 @@ const SignUp = () => {
       await signup(form);
 
       navigate(PATH.SIGN_IN);
+      setIsError(false);
     } catch (err) {
       console.error(err);
+      setIsError(true);
     }
   };
 
   return (
-    <form onSubmit={handleSignUpSubmit}>
-      <input data-testid="email-input" type="text" name="email" value={form.email} onChange={handleFieldChange} />
-      <input
-        data-testid="password-input"
-        type="password"
-        name="password"
-        value={form.password}
-        onChange={handleFieldChange}
-      />
-      <button data-testid="signup-button" type="submit" disabled={isDisabled}>
-        회원가입
-      </button>
-    </form>
+    <Container width="600px">
+      <Title>원티드 프리온보딩 사전과제</Title>
+      <form onSubmit={handleSignUpSubmit}>
+        <Input
+          data-testid="email-input"
+          type="text"
+          name="email"
+          placeholder="이메일"
+          value={form.email}
+          onChange={handleFieldChange}
+          isError={isError}
+          margin="0 0 15px"
+        />
+        <Input
+          data-testid="password-input"
+          type="password"
+          name="password"
+          placeholder="패스워드"
+          autoComplete="off"
+          value={form.password}
+          onChange={handleFieldChange}
+          isError={isError}
+        />
+        <Button data-testid="signup-button" type="submit" disabled={isDisabled} margin="20px 0">
+          회원가입
+        </Button>
+      </form>
+      <Link to={PATH.SIGN_IN}>로그인하러 가기</Link>
+    </Container>
   );
 };
 
