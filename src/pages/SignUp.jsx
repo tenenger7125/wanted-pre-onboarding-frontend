@@ -11,7 +11,7 @@ const { email: emailValidate, password: passwordValidate } = validates;
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [isError, setIsError] = useState(false);
+  const [isErrored, setIsErrored] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -35,10 +35,10 @@ const SignUp = () => {
       await signup(form);
 
       navigate(PATH.SIGN_IN);
-      setIsError(false);
+      setIsErrored(false);
     } catch (err) {
       console.error(err);
-      setIsError(true);
+      setIsErrored(true);
     }
   };
 
@@ -53,7 +53,7 @@ const SignUp = () => {
           placeholder="이메일"
           value={form.email}
           onChange={handleFieldChange}
-          isError={isError}
+          isErrored={isErrored}
           margin="0 0 15px"
         />
         <Input
@@ -64,7 +64,6 @@ const SignUp = () => {
           autoComplete="off"
           value={form.password}
           onChange={handleFieldChange}
-          isError={isError}
         />
         <Button data-testid="signup-button" type="submit" disabled={isDisabled} margin="20px 0">
           회원가입
