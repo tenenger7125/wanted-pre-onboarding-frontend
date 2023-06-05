@@ -1,4 +1,4 @@
-import { Input, Button } from "../common";
+import { Input, Button } from "../../components/common";
 
 const TodoInput = ({ handleCreateTodo }) => {
   return (

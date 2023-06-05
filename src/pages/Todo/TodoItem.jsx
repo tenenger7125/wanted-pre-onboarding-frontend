@@ -1,7 +1,18 @@
 import { useState } from "react";
+import styled from "styled-components";
+import { BsCheckSquare } from "react-icons/bs";
 
-import { Button, Input } from "../common";
-import { SButtonContainer, SCheckBoxIcon } from "./Todo.style";
+import { Button, Input } from "../../components/common";
+
+const SButtonContainer = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
+const SCheckBoxIcon = styled(BsCheckSquare)`
+  color: ${(props) => (props.$isCompleted ? props.theme.colors.blue[6] : props.theme.colors.gray[4])};
+  margin-right: 10px;
+`;
 
 const TodoItem = ({ todo: { id, todo, isCompleted }, handleUpdateTodo, handleDeleteTodo }) => {
   const [modifyValue, setModifyValue] = useState(todo);

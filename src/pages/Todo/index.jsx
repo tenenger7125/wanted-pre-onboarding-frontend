@@ -1,6 +1,7 @@
-import { TodoInput, TodoList } from "../components/Todo";
-import { Container, Title } from "../components/common";
-import { useTodo } from "../hooks";
+import { Container, Title } from "../../components/common";
+import TodoInput from "./TodoInput";
+import TodoList from "./TodoList";
+import useTodo from "../../hooks/useTodo";
 
 const Todo = () => {
   const { todos, handleCreateTodo, handleUpdateTodo, handleDeleteTodo } = useTodo();
