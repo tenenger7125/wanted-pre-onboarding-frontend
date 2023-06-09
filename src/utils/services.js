@@ -22,11 +22,11 @@ const service = {
     return instance;
   },
   todo(token) {
-    instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
     instance.interceptors.request.use(
       (config) => {
         if (config.method === "post" || config.method === "put") config.headers["Content-Type"] = "application/json";
+
+        config.headers.Authorization = `Bearer ${token}`;
 
         return config;
       },
