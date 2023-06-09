@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Container, Input, Title } from "../components/common";
 import { auth } from "../apis";
 import { localStorages, validates } from "../utils";
-import { PATH } from "../constants";
+import { PATH, TEST_ID } from "../constants";
 
 const { signin } = auth;
 const { email: emailValidate, password: passwordValidate } = validates;
@@ -49,7 +49,7 @@ const SignIn = () => {
       <Title>원티드 프리온보딩 사전과제</Title>
       <form onSubmit={handleSignInSubmit}>
         <Input
-          data-testid="email-input"
+          data-testid={TEST_ID.EMAIL_INPUT}
           type="text"
           name="email"
           placeholder="이메일"
@@ -59,7 +59,7 @@ const SignIn = () => {
           margin="0 0 15px"
         />
         <Input
-          data-testid="password-input"
+          data-testid={TEST_ID.PASSWORD_INPUT}
           type="password"
           name="password"
           placeholder="패스워드"
@@ -68,7 +68,7 @@ const SignIn = () => {
           onChange={handleFieldChange}
           isErrored={isErrored}
         />
-        <Button data-testid="signin-button" type="submit" disabled={isDisabled} margin="20px 0">
+        <Button data-testid={TEST_ID.SIGNIN_BUTTON} type="submit" disabled={isDisabled} margin="20px 0">
           로그인
         </Button>
       </form>

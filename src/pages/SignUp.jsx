@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Container, Input, Title } from "../components/common";
 import { auth } from "../apis";
 import { validates } from "../utils";
-import { PATH } from "../constants";
+import { PATH, TEST_ID } from "../constants";
 
 const { signup } = auth;
 const { email: emailValidate, password: passwordValidate } = validates;
@@ -47,7 +47,7 @@ const SignUp = () => {
       <Title>원티드 프리온보딩 사전과제</Title>
       <form onSubmit={handleSignUpSubmit}>
         <Input
-          data-testid="email-input"
+          data-testid={TEST_ID.EMAIL_INPUT}
           type="text"
           name="email"
           placeholder="이메일"
@@ -57,7 +57,7 @@ const SignUp = () => {
           margin="0 0 15px"
         />
         <Input
-          data-testid="password-input"
+          data-testid={TEST_ID.PASSWORD_INPUT}
           type="password"
           name="password"
           placeholder="패스워드"
@@ -65,7 +65,7 @@ const SignUp = () => {
           value={form.password}
           onChange={handleFieldChange}
         />
-        <Button data-testid="signup-button" type="submit" disabled={isDisabled} margin="20px 0">
+        <Button data-testid={TEST_ID.SIGNUP_BUTTON} type="submit" disabled={isDisabled} margin="20px 0">
           회원가입
         </Button>
       </form>

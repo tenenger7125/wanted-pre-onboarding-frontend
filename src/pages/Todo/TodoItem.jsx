@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { BsCheckSquare } from "react-icons/bs";
 
 import { Button, Input } from "../../components/common";
+import { TEST_ID } from "../../constants";
 
 const SButtonContainer = styled.div`
   display: flex;
@@ -36,21 +37,21 @@ const TodoItem = ({ todo: { id, todo, isCompleted }, handleUpdateTodo, handleDel
         <SCheckBoxIcon size="1.5rem" $isCompleted={isCompleted} />
         <input type="checkbox" checked={isCompleted} onChange={() => handleUpdateTodo(id, todo, !isCompleted)} />
         {isEdited ? (
-          <Input data-testid="modify-input" value={modifyValue} onChange={handleModifyTodo} />
+          <Input data-testid={TEST_ID.MODIFY_INPUT} value={modifyValue} onChange={handleModifyTodo} />
         ) : (
           <span>{todo}</span>
         )}
       </label>
       <SButtonContainer>
         <Button
-          data-testid={`${isEdited ? "submit" : "modify"}-button`}
+          data-testid={isEdited ? TEST_ID.SUBMIT_BUTTON : TEST_ID.MODIFY_BUTTON}
           onClick={isEdited ? handleUpdateContentTodo : handleToggleEdit}
         >
           {isEdited ? "제출" : "수정"}
         </Button>
         <Button
           variant="outline"
-          data-testid={`${isEdited ? "cancel" : "delete"}-button`}
+          data-testid={isEdited ? TEST_ID.CANCEL_BUTTON : TEST_ID.DELETE_BUTTON}
           onClick={isEdited ? handleToggleEdit : () => handleDeleteTodo(id)}
         >
           {isEdited ? "취소" : "삭제"}
