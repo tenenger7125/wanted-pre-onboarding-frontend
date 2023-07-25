@@ -6,14 +6,18 @@ const { createTodo, deleteTodo, getTodos, updateTodo } = todo;
 
 const useTodo = () => {
   const [todos, setTodos] = useState([]);
+  const [todoInput, setTodoInput] = useState("");
+
+  const handleNewTodoChange = (e) => {
+    setTodoInput(e.target.value);
+  };
 
   const handleCreateTodo = async (e) => {
     e.preventDefault();
 
     try {
-      const todo = await createTodo(e.target.newTodo.value.trim());
+      const todo = await createTodo(todoInput.trim());
 
-      e.target.newTodo.value = "";
       setTodos([...todos, todo]);
     } catch (err) {
       console.error(err);
@@ -41,18 +45,24 @@ const useTodo = () => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+
     (async () => {
       try {
-        const todos = await getTodos();
+        const todos = await getTodos(controller.signal);
 
         setTodos(todos);
       } catch (err) {
         console.error(err);
       }
     })();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
-  return { todos, handleCreateTodo, handleUpdateTodo, handleDeleteTodo };
+  return { todoInput, todos, handleNewTodoChange, handleCreateTodo, handleUpdateTodo, handleDeleteTodo };
 };
 
 export default useTodo;

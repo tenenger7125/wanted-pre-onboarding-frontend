@@ -5,9 +5,9 @@ const { getLocalStorage } = localStorages;
 const { todo: todoService } = services;
 
 const todo = {
-  async getTodos() {
+  async getTodos(signal) {
     const access_token = getLocalStorage("access_token");
-    const { data } = await todoService(access_token).get(URL.TODOS);
+    const { data } = await todoService(access_token).get(URL.TODOS, { signal });
 
     return data;
   },
